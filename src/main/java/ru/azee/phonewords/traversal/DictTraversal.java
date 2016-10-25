@@ -6,11 +6,9 @@ import ru.azee.phonewords.dictionary.DictionaryProviderFactory;
 import ru.azee.phonewords.dictionary.Node;
 import ru.azee.phonewords.dictionary.NumbersMap;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 /**
@@ -34,58 +32,55 @@ public class DictTraversal {
 
     private Set<String> getWords(String numb) {
         Set<String> values = new HashSet<>();
-        getWords(numb, dictionary, new StringBuilder(), values);
+        getWords(numb, dictionary, new LinkedList<>(), values);
         return values;
     }
 
-    private void getWords(String numb, Node head, StringBuilder sb, Set<String> values) {
+    private void getWords(String numb, Node head, List<String> tokens, Set<String> values) {
         //ToDo : do something with 1
-//        numbersMap.getDict().get(numb.charAt(0)).stream().forEach(character ->
-//                getWords(numb, head, head.getChildren().get(character), dictionary, sb, values, numbersMap)
-//        );
         if (numb.length() == 0){
-            if (sb.length() > 0){
-                values.add(sb.toString());
-            }
             return;
         }
         for (Character character : numbersMap.getDict().get(numb.charAt(0))){
-            getWords(numb, head, head.getChildren().get(character), new StringBuilder(sb), values);
+            getWords(numb, head, head.getChildren().get(character), new LinkedList<>(tokens), values);
         }
     }
 
-    private void getWords(String numb, Node head, Node child, StringBuilder sb, Set<String> values) {
-//        if (numb.length() == 0){
-//            values.add(sb.toString());
-//            return;
-//        }
-        if (child == null){ //ToDo : disallow 2 digits
-            if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '-'){
+    private void getWords(String numb, Node head, Node child, List<String> tokens, Set<String> values) {
+        if (child == null){
+            if (tokens.size() > 0 && (isNumeric(tokens.get(tokens.size() - 1))) || head != dictionary){
                 return;
             }
-
-            if (sb.length() > 0){
-                sb.append("-");
-            }
-            sb.append(numb.charAt(0));
-            if (numb.length() > 1){
-                sb.append("-");
-            }
+            tokens.add(String.valueOf(numb.charAt(0)));
             head = dictionary;
         } else {
             head = child;
-            //GetMore words if possible even if hit the target word
-            //getWords(numb.substring(1, numb.length()), head, dictionary, new StringBuilder(sb), values, numbersMap);
+
+            //GetMore words if possible even if hit the target word - there may be a longer one
+            //down the tree
+            getWords(numb.substring(1, numb.length()), head, new LinkedList<>(tokens), values);
 
             if (child.getWord() != null){
-                sb.append(child.getWord());
+                tokens.add(child.getWord());
                 head = dictionary;
-                if (numb.length() > 1){
-                    sb.append("-");
+
+                //Hit last character in number sequence
+                if (numb.length() == 1){
+                    values.add(tokens.stream().collect(joining("-")));
+                    return;
                 }
             }
         }
-        getWords(numb.substring(1, numb.length()), head, sb, values);
+        getWords(numb.substring(1, numb.length()), head, tokens, values);
+    }
+
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
 }

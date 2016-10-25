@@ -14,6 +14,6 @@ public class DefaultDataProvider implements DataProvider {
     public List<String> provide() {
 //        return Stream.of("225563", "2255.63").collect(toList());
         return Stream.of("225563").collect(toList());
-//        return Stream.of("2").collect(toList());
+//        return Stream.of("22").collect(toList());
     }
 }

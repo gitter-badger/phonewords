@@ -14,10 +14,12 @@ public class Main {
         printResults(values);
     }
 
-
-
     private static void printResults(Map<String, Set<String>> values) {
-
+        values.entrySet().forEach(entry -> {
+            System.out.println(String.format("%s: ", entry.getKey()));
+            entry.getValue().forEach(System.out::println);
+            System.out.println();
+        });
     }
 
 }
