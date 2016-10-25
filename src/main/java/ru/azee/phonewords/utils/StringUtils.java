@@ -5,7 +5,8 @@ package ru.azee.phonewords.utils;
  */
 public class StringUtils {
     public static String normalize(String str){
-        str = str.toUpperCase();
+        str = str == null ? "" : str;
+        str = str.toUpperCase().replaceAll("[^a-zA-Z0-9]+","");
         return str;
     }
 }
