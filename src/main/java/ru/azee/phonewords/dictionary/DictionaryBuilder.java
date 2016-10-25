@@ -1,5 +1,7 @@
 package ru.azee.phonewords.dictionary;
 
+import ru.azee.phonewords.utils.StringUtils;
+
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ public class DictionaryBuilder {
     }
 
     private static void addToTree(String word, Node head) {
+        word = StringUtils.normalize(word);
         for (char character : word.toCharArray()){
             head = head.initChild(character);
         }

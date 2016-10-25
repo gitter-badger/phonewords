@@ -37,7 +37,6 @@ public class DictTraversal {
     }
 
     private void getWords(String numb, Node head, List<String> tokens, Set<String> values) {
-        //ToDo : do something with 1
         if (numb.length() == 0){
             return;
         }
