@@ -10,9 +10,7 @@ public class StringUtils {
      * @return - normalized string
      */
     public static String normalize(String str){
-        str = str == null ? "" : str;
-        str = str.toUpperCase().replaceAll("[^a-zA-Z0-9]+","");
-        return str;
+        return str == null ? "" : str.toUpperCase();
     }
 
     /**
@@ -21,7 +19,15 @@ public class StringUtils {
      * @return - normalized string
      */
     public static String normalizeWords(String str){
-        str = normalize(str);
-        return str.replaceAll("[^a-zA-Z]+","");
+        return normalize(str).replaceAll("[^a-zA-Z]+","");
+    }
+
+    /**
+     * Remove all but numbers
+     * @param str - input string
+     * @return - normalized string
+     */
+    public static String normalizeNumbers(String str){
+        return normalize(str).replaceAll("[^0-9]+","");
     }
 }

@@ -9,6 +9,7 @@ import java.util.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 import static ru.azee.phonewords.utils.StringUtils.normalize;
+import static ru.azee.phonewords.utils.StringUtils.normalizeNumbers;
 
 /**
  * Created by azee on 24.10.16.
@@ -56,7 +57,7 @@ public class DictTraversal {
      * @return - set of possible substitutions
      */
     private Set<String> getWords(String numb) {
-        numb = normalize(numb);
+        numb = normalizeNumbers(numb);
         Set<String> values = new HashSet<>();
         getWords(numb, dictionary, new LinkedList<>(), values);
         return values;

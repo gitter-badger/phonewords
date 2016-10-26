@@ -143,6 +143,15 @@ public class DictTraversalTest {
         validateInvariants(result, "02", 1, "0-A");
     }
 
+    @Test
+    public void wordInNumberTest(){
+        String number = "a5b6c2d";
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("job")).getValues(Arrays.asList(number));
+        validateNumberResult(result, 1, number);
+        validateInvariants(result, number, 1, "JOB");
+    }
+
     private void validateNumberResult(Map<String, Set<String>> result, int size, String... keys){
         assertNotNull(result);
         assertThat(result.size(), is(size));
