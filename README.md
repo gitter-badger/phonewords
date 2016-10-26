@@ -4,8 +4,8 @@ Reasoning
 ==========
 
 I have selected 1-800-CODING-CHALLENGE because:
-always wanted to build a real-life application that involves trie-trees
-even if I won't sucseed this code can be used for my future projects
+⋅⋅* always wanted to build a real-life application that involves trie-trees
+⋅⋅* even if I won't sucseed this code can be used for my future projects
 
 Design
 ==========
