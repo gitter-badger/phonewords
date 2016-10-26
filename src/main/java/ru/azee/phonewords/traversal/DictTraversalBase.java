@@ -17,7 +17,19 @@ public abstract class DictTraversalBase {
     protected List<String> numbers;
     protected NumbersMap numbersMap;
 
-    public Map<String, Set<String>> getValues() {
+    public void printValues() {
+        printValues(getValues());
+    }
+
+    protected void printValues(Map<String, Set<String>> values) {
+        values.entrySet().forEach(entry -> {
+            System.out.println(String.format("%s: ", entry.getKey()));
+            entry.getValue().forEach(System.out::println);
+            System.out.println();
+        });
+    }
+
+    protected Map<String, Set<String>> getValues() {
         return numbers.stream().map(numb -> new AbstractMap.SimpleEntry<>(numb, getWords(numb)))
                 .filter(entry -> entry.getValue().size() > 0)
                 .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
