@@ -2,6 +2,7 @@ package ru.azee.phonewords.traversal;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -124,6 +125,25 @@ public class DictTraversalTest {
                 Arrays.asList(number)).getValues();
         validateNumberResult(result, 1, number);
         validateInvariants(result, number, 1, "HIRE-ME");
+    }
+
+    @Test
+    public void emptyDictionaryTest(){
+        Map<String, Set<String>> result =  new DictTraversalMock(
+                new ArrayList<>(),
+                Arrays.asList("1", "5", "77")).getValues();
+        validateNumberResult(result, 2, "1", "5");
+        validateInvariants(result, "1", 1, "1");
+        validateInvariants(result, "5", 1, "5");
+
+    }
+
+    @Test
+    public void emptyPhonesListTest(){
+        Map<String, Set<String>> result =  new DictTraversalMock(
+                Arrays.asList("please", "hire", "me"),
+                new ArrayList<>()).getValues();
+        validateNumberResult(result, 0);
     }
 
     private void validateNumberResult(Map<String, Set<String>> result, int size, String... keys){
