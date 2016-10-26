@@ -3,6 +3,10 @@ package ru.azee.phonewords.dictionary;
 import org.junit.After;
 import org.junit.Test;
 
+import java.util.List;
+
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -27,5 +31,14 @@ public class DictionaryProviderFactoryTest {
         provider = DictionaryProviderFactory.getProvider();
         assertNotNull(provider);
         assertThat(provider, instanceOf(FileDictionaryProvider.class));
+    }
+
+
+    @Test
+    public void defaultDictionaryProviderTest(){
+        DictionaryProvider provider = DictionaryProviderFactory.getProvider();
+        List<String> dict = provider.provide();
+        assertThat(dict.size(), is(2));
+        assertThat(dict, containsInAnyOrder("call", "me"));
     }
 }
