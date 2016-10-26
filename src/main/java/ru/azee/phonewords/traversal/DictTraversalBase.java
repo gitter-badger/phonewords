@@ -1,8 +1,5 @@
 package ru.azee.phonewords.traversal;
 
-import ru.azee.phonewords.data.DataProviderFactory;
-import ru.azee.phonewords.dictionary.DictionaryBuilder;
-import ru.azee.phonewords.dictionary.DictionaryProviderFactory;
 import ru.azee.phonewords.dictionary.Node;
 import ru.azee.phonewords.dictionary.NumbersMap;
 
@@ -19,12 +16,6 @@ public abstract class DictTraversalBase {
     protected Node dictionary;
     protected List<String> numbers;
     protected NumbersMap numbersMap;
-
-    public DictTraversalBase() {
-        dictionary = DictionaryBuilder.build(DictionaryProviderFactory.getProvider().provide());
-        numbers = DataProviderFactory.getDataProvider().provide();
-        numbersMap = new NumbersMap();
-    }
 
     public Map<String, Set<String>> getValues() {
         return numbers.stream().map(numb -> new AbstractMap.SimpleEntry<>(numb, getWords(numb)))

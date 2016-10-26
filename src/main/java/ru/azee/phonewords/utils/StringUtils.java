@@ -9,4 +9,9 @@ public class StringUtils {
         str = str.toUpperCase().replaceAll("[^a-zA-Z0-9]+","");
         return str;
     }
+
+    public static String normalizeWords(String str){
+        str = normalize(str);
+        return str.toUpperCase().replaceAll("[^a-zA-Z]+","");
+    }
 }

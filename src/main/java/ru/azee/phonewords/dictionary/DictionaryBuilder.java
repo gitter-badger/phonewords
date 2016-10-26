@@ -1,8 +1,8 @@
 package ru.azee.phonewords.dictionary;
 
-import ru.azee.phonewords.utils.StringUtils;
-
 import java.util.List;
+
+import static ru.azee.phonewords.utils.StringUtils.normalizeWords;
 
 /**
  * Created by azee on 24.10.16.
@@ -16,7 +16,7 @@ public class DictionaryBuilder {
     }
 
     private static void addToTree(String word, Node head) {
-        word = StringUtils.normalize(word);
+        word = normalizeWords(word);
         for (char character : word.toCharArray()){
             head = head.initChild(character);
         }

@@ -116,6 +116,16 @@ public class DictTraversalTest {
         validateInvariants(result, "234", 4, "BEG", "CEG", "AD-4", "BF-4");
     }
 
+    @Test
+    public void invalidSymbolsInNumbersTest(){
+        final String number = "§±!@#$%4^&*()4_-+=7?/3_6-_3*&^><";
+        Map<String, Set<String>> result =  new DictTraversalMock(
+                Arrays.asList("h!i r\ne", "±§?.-'/m190-_=}{|:;.><,)(*&^%$#@!e"),
+                Arrays.asList(number)).getValues();
+        validateNumberResult(result, 1, number);
+        validateInvariants(result, number, 1, "HIRE-ME");
+    }
+
     private void validateNumberResult(Map<String, Set<String>> result, int size, String... keys){
         assertNotNull(result);
         assertThat(result.size(), is(size));
