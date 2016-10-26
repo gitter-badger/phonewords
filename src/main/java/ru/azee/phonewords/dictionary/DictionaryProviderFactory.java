@@ -6,6 +6,10 @@ package ru.azee.phonewords.dictionary;
 public class DictionaryProviderFactory {
     public final static String FILE_PATH_PROPERTY = "dictionary";
 
+    /**
+     * Get a provider depending on parameters
+     * @return - DictionaryProvider implementation
+     */
     public static DictionaryProvider getProvider(){
         String path = System.getProperty(FILE_PATH_PROPERTY);
         return path == null || "".equals(path) ?

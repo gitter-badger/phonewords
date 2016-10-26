@@ -9,6 +9,14 @@ import java.util.Set;
 
 /**
  * Created by azee on 26.10.16.
+ *
+ * Executor is used to perform actions
+ * As we may want to interact with user live or we may want to use files
+ * we have to use different types of execution - interact or run-once.
+ *
+ * It is possible to implement async or queued executors as well.
+ *
+ * This abstraction allows to implement different types of interactions.
  */
 public abstract class Executor {
 
