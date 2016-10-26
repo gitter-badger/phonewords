@@ -14,7 +14,9 @@ public class DefaultDictionaryProvider implements DictionaryProvider {
     @Override
     public List<String> provide() {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/dictionary.txt")));
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(getClass().getResourceAsStream("/dictionary.txt"))
+            );
             return reader.lines().collect(toList());
         } catch (Exception e) {
             return new ArrayList<>();
