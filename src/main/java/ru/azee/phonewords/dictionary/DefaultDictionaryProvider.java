@@ -21,6 +21,5 @@ public class DefaultDictionaryProvider implements DictionaryProvider {
         } catch (Exception e) {
             return new ArrayList<>();
         }
-
     }
 }
