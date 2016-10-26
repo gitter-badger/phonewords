@@ -1,5 +1,5 @@
 package ru.azee.phonewords;
-import ru.azee.phonewords.traversal.DictTraversal;
+import ru.azee.phonewords.executor.ExecutorFactory;
 
 /**
  * Created by azee on 24.10.16.
@@ -7,7 +7,7 @@ import ru.azee.phonewords.traversal.DictTraversal;
 public class Main {
 
     public static void main(String... args){
-        new DictTraversal().printValues();
+        ExecutorFactory.getExecutor().execute();
     }
 
 }

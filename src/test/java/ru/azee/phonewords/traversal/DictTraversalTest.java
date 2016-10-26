@@ -19,9 +19,8 @@ public class DictTraversalTest {
 
     @Test
     public void positiveExampleTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now"),
-                Arrays.asList("2255.63")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now")).getValues(Arrays.asList("2255.63"));
 
         validateNumberResult(result, 1, "2255.63");
         validateInvariants(result, "2255.63", 1, "CALL-ME");
@@ -29,9 +28,8 @@ public class DictTraversalTest {
 
     @Test
     public void multipleInvariantsTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now", "ball"),
-                Arrays.asList("2255.63")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now", "ball")).getValues(Arrays.asList("2255.63"));
 
         validateNumberResult(result, 1, "2255.63");
         validateInvariants(result, "2255.63", 2, "CALL-ME", "BALL-ME");
@@ -39,9 +37,8 @@ public class DictTraversalTest {
 
     @Test
     public void longInvariantsTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now", "baklof", "callof"),
-                Arrays.asList("2255.63")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now", "baklof", "callof")).getValues(Arrays.asList("2255.63"));
 
         validateNumberResult(result, 1, "2255.63");
         validateInvariants(result, "2255.63", 3, "CALL-ME", "BAKLOF", "CALLOF");
@@ -49,9 +46,8 @@ public class DictTraversalTest {
 
     @Test
     public void oneAsNumberAtTheBeginningTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now"),
-                Arrays.asList("12255.63")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now")).getValues(Arrays.asList("12255.63"));
 
         validateNumberResult(result, 1, "12255.63");
         validateInvariants(result, "12255.63", 1, "1-CALL-ME");
@@ -59,9 +55,8 @@ public class DictTraversalTest {
 
     @Test
     public void oneAsNumberInTheMiddleTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now"),
-                Arrays.asList("2255163")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now")).getValues(Arrays.asList("2255163"));
 
         validateNumberResult(result, 1, "2255163");
         validateInvariants(result, "2255163", 1, "CALL-1-ME");
@@ -69,9 +64,8 @@ public class DictTraversalTest {
 
     @Test
     public void oneAsNumberAtTheEndTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now"),
-                Arrays.asList("2255631")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now")).getValues(Arrays.asList("2255631"));
 
         validateNumberResult(result, 1, "2255631");
         validateInvariants(result, "2255631", 1, "CALL-ME-1");
@@ -79,9 +73,8 @@ public class DictTraversalTest {
 
     @Test
     public void randomNumberInDifferentPlacesTheEndTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now"),
-                Arrays.asList("722558639")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now")).getValues(Arrays.asList("722558639"));
 
         validateNumberResult(result, 1, "722558639");
         validateInvariants(result, "722558639", 1, "7-CALL-8-ME-9");
@@ -89,9 +82,8 @@ public class DictTraversalTest {
 
     @Test
     public void oneAsNumberInDifferentPlacesTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("call", "me", "now"),
-                Arrays.asList("122551631")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("call", "me", "now")).getValues(Arrays.asList("122551631"));
 
         validateNumberResult(result, 1, "122551631");
         validateInvariants(result, "122551631", 1, "1-CALL-1-ME-1");
@@ -99,18 +91,16 @@ public class DictTraversalTest {
 
     @Test
     public void consequenceNumbersTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("gL", "g", "L"),
-                Arrays.asList("2345")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("gL", "g", "L")).getValues(Arrays.asList("2345"));
 
         validateNumberResult(result, 0);
     }
 
     @Test
     public void multipleNumbersTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("ad", "bf", "beg", "ceg"),
-                Arrays.asList("123", "234")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("ad", "bf", "beg", "ceg")).getValues(Arrays.asList("123", "234"));
 
         validateNumberResult(result, 2, "123", "234");
         validateInvariants(result, "123", 2, "1-AD", "1-BF");
@@ -120,18 +110,17 @@ public class DictTraversalTest {
     @Test
     public void invalidSymbolsInNumbersTest(){
         final String number = "§±!@#$%4^&*()4_-+=7?/3_6-_3*&^><";
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("h!i r\ne", "±§?.-'/m190-_=}{|:;.><,)(*&^%$#@!e"),
-                Arrays.asList(number)).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("h!i r\ne", "±§?.-'/m190-_=}{|:;.><,)(*&^%$#@!e"))
+                .getValues(Arrays.asList(number));
         validateNumberResult(result, 1, number);
         validateInvariants(result, number, 1, "HIRE-ME");
     }
 
     @Test
     public void emptyDictionaryTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                new ArrayList<>(),
-                Arrays.asList("1", "5", "77")).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                new ArrayList<>()).getValues(Arrays.asList("1", "5", "77"));
         validateNumberResult(result, 2, "1", "5");
         validateInvariants(result, "1", 1, "1");
         validateInvariants(result, "5", 1, "5");
@@ -140,10 +129,18 @@ public class DictTraversalTest {
 
     @Test
     public void emptyPhonesListTest(){
-        Map<String, Set<String>> result =  new DictTraversalMock(
-                Arrays.asList("please", "hire", "me"),
-                new ArrayList<>()).getValues();
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("please", "hire", "me")).getValues(new ArrayList<>());
         validateNumberResult(result, 0);
+    }
+
+    @Test
+    public void zeroNumberTest(){
+        Map<String, Set<String>> result =  new DictTraversal(
+                Arrays.asList("a")).getValues(Arrays.asList("0", "01", "02"));
+        validateNumberResult(result, 2, "0", "02");
+        validateInvariants(result, "0", 1, "0");
+        validateInvariants(result, "02", 1, "0-A");
     }
 
     private void validateNumberResult(Map<String, Set<String>> result, int size, String... keys){

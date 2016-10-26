@@ -14,6 +14,7 @@ public class NumbersMap {
     private Map<Character, Set<Character>> dict = new HashMap<>();
 
     public NumbersMap() {
+        dict.put('0', Stream.of('0').collect(toSet()));
         dict.put('1', Stream.of('1').collect(toSet()));
         dict.put('2', Stream.of('A', 'B', 'C').collect(toSet()));
         dict.put('3', Stream.of('D', 'E', 'F').collect(toSet()));
