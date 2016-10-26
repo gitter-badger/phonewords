@@ -1,5 +1,7 @@
 # phonewords
 
+[![Join the chat at https://gitter.im/azee/phonewords](https://badges.gitter.im/azee/phonewords.svg)](https://gitter.im/azee/phonewords?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Reasoning
 ==========
 
