@@ -1,7 +1,9 @@
 package ru.azee.phonewords.dictionary;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -11,6 +13,12 @@ import static java.util.stream.Collectors.toList;
 public class DefaultDictionaryProvider implements DictionaryProvider {
     @Override
     public List<String> provide() {
-        return Stream.of("CALL", "ME", "AAJJMD", "AA", "A").collect(toList());
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/dictionary.txt")));
+            return reader.lines().collect(toList());
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+
     }
 }
