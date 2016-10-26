@@ -59,7 +59,7 @@ public abstract class DictTraversalBase {
 
             //GetMore words if possible even if hit the target word - there may be a longer one
             //down the tree
-            getWords(numb.substring(1, numb.length()), head, new LinkedList<>(tokens), values);
+            //getWords(numb.substring(1, numb.length()), head, new LinkedList<>(tokens), values);
 
             if (child.getWord() != null){
                 tokens.add(child.getWord());
@@ -71,6 +71,10 @@ public abstract class DictTraversalBase {
                     return;
                 }
             }
+        }
+        if (numb.length() == 1){
+            values.add(tokens.stream().collect(joining("-")));
+            return;
         }
         getWords(numb.substring(1, numb.length()), head, tokens, values);
     }
