@@ -27,7 +27,9 @@ public abstract class DictTraversalBase {
     }
 
     public Map<String, Set<String>> getValues() {
-        return numbers.stream().collect(toMap(numb -> numb, numb -> getWords(numb)));
+        return numbers.stream().map(numb -> new AbstractMap.SimpleEntry<>(numb, getWords(numb)))
+                .filter(entry -> entry.getValue().size() > 0)
+                .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 
     }
 
